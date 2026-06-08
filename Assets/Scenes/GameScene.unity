@@ -349,6 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224419178}
   - component: {fileID: 224419179}
+  - component: {fileID: 224419180}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -408,6 +409,28 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &224419180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224419177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d55d0da6a6f44aeb56b952a2fe8f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridManager
+  _grid:
+  - {fileID: 6766861486051105053}
+  - {fileID: 1138036209}
+  - {fileID: 2043512345}
+  - {fileID: 1651625740}
+  - {fileID: 1621482465}
+  - {fileID: 1427163267}
+  - {fileID: 1298972822}
+  - {fileID: 1485405848}
+  - {fileID: 1284452839}
 --- !u!1001 &273845156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1085,6 +1108,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6052281341418360693, guid: a8432b120ad7148558566674b495e3e4, type: 3}
   m_PrefabInstance: {fileID: 1138036207}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1138036209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 1138036207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
 --- !u!1 &1180374373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1296,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6052281341418360693, guid: a8432b120ad7148558566674b495e3e4, type: 3}
   m_PrefabInstance: {fileID: 1284452837}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1284452839 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 1284452837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
+--- !u!114 &1298972822 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 6177257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
 --- !u!1 &1374895356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,6 +1393,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374895356}
   m_CullTransparentMesh: 1
+--- !u!1 &1426670187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426670189}
+  - component: {fileID: 1426670188}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1426670188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426670187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14717eb29650401199710b4eee42df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  _gridManager: {fileID: 0}
+--- !u!4 &1426670189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426670187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1427163265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1439,6 +1540,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6052281341418360693, guid: a8432b120ad7148558566674b495e3e4, type: 3}
   m_PrefabInstance: {fileID: 1427163265}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1427163267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 1427163265}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
+--- !u!114 &1485405848 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 870721055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
 --- !u!1001 &1621482463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1541,6 +1664,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6052281341418360693, guid: a8432b120ad7148558566674b495e3e4, type: 3}
   m_PrefabInstance: {fileID: 1621482463}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1621482465 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 1621482463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
 --- !u!1001 &1651625738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1643,6 +1777,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6052281341418360693, guid: a8432b120ad7148558566674b495e3e4, type: 3}
   m_PrefabInstance: {fileID: 1651625738}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1651625740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 1651625738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
 --- !u!1 &1679761885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,6 +1892,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2043512345 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 273845156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
 --- !u!1 &2056656112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,6 +2080,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6052281341418360693, guid: a8432b120ad7148558566674b495e3e4, type: 3}
   m_PrefabInstance: {fileID: 6766861486051105051}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6766861486051105053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5886146043745568863, guid: a8432b120ad7148558566674b495e3e4, type: 3}
+  m_PrefabInstance: {fileID: 6766861486051105051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9766ad84a4b304ddf8904198d13b3a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridSquareManager
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1932,3 +2099,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1679761889}
   - {fileID: 196274591}
+  - {fileID: 1426670189}
