@@ -22,4 +22,8 @@ public class GridManager : MonoBehaviour
     {
         _grid[square].SetSquare(gridSquareState);
     }
+    public GridSquareState GetSpecificSquareState(int squareId)
+    {
+        return _grid[squareId].GetSquareState();
+    }
 }

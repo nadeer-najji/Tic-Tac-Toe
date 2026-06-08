@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     private GridSquareState _playerSquareState;
     private GridSquareState _enemySquareState;
     private Turn _currentTurn;
+    private bool _awaitingTime =false;
 
     private void Awake()
     {
@@ -41,10 +42,12 @@ public class GameManager : MonoBehaviour
             _playerSquareState = GridSquareState.o;
             _enemySquareState = GridSquareState.x;
         }
+        _awaitingTime = true;
     }
 
     private void ProcessTurn(Turn turn, int selectedSquare)
     {
+        _awaitingTime = false;
         GridSquareState state = GridSquareState.empty;
 
         if(turn == Turn.playerTurn)
@@ -56,10 +59,31 @@ public class GameManager : MonoBehaviour
             state = _enemySquareState;
         }
         _gridManager.SetSpecificSquare(state, selectedSquare);
+        ChangeTurn();
+        _awaitingTime = true;
+    }
+    public void ChangeTurn()
+    {
+        if(_currentTurn == Turn.playerTurn)
+        {
+            _currentTurn = Turn.enemyTurn;
+        }
+        else
+        {
+            _currentTurn = Turn.playerTurn;
+        }
     }
     public void GridSquareClicked(int clickedSquare)
     {
-        Debug.Log("Square Clicked: " + clickedSquare);
+        if(_awaitingTime == false)
+        {
+            return;
+        }
+        if(_gridManager.GetSpecificSquareState(clickedSquare) != GridSquareState.empty)
+        {
+            return;
+        }
+        ProcessTurn(_currentTurn, clickedSquare);
     }
 }
 public enum Turn

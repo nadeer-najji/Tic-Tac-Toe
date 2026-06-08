@@ -14,6 +14,11 @@ public class GridSquareManager : MonoBehaviour, IPointerClickHandler
         GameManager.Instance.GridSquareClicked(_squareId);
     }
 
+    public GridSquareState GetSquareState()
+    {
+        return _currentState;
+    }
+
     public void SetSquare(GridSquareState newState)
     {
         if(newState == GridSquareState.empty)
@@ -31,6 +36,7 @@ public class GridSquareManager : MonoBehaviour, IPointerClickHandler
             _oText.enabled = true;
             _xText.enabled = false;
         }
+        _currentState = newState;
     }
     public void SetSquareId(int id)
     {
