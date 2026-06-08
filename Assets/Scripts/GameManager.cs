@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private GridSquareState _enemySquareState;
     private Turn _currentTurn;
     private bool _awaitingTime =false;
+    private GameResult _currentGameState;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void StartNewGame()
     {
+        _currentGameState = GameResult.ongoing;
         // Reset the grid
         _gridManager.ResetGrid();
 
@@ -59,8 +61,98 @@ public class GameManager : MonoBehaviour
             state = _enemySquareState;
         }
         _gridManager.SetSpecificSquare(state, selectedSquare);
-        ChangeTurn();
-        _awaitingTime = true;
+
+        bool gameEnded =CheckIfGameEnded();
+        if(!gameEnded)
+        {
+            ChangeTurn();
+            _awaitingTime = true;
+        }
+    }
+
+    private bool CheckIfGameEnded()
+    {
+        bool gridFull = _gridManager.CheckIfGridFull();
+
+        GridSquareState winner = CheckForWin();
+        if(winner != GridSquareState.empty)
+        {
+            if(winner == _playerSquareState)
+            {
+                _currentGameState = GameResult.PlayerWin;
+                return true;
+            }
+            else
+            {
+                _currentGameState = GameResult.EnemyWin;
+                return true;
+            }
+        }
+        else
+        {
+            if(gridFull)
+            {
+                _currentGameState = GameResult.draw;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    
+    private GridSquareState CheckForWin()
+    {
+        GridSquareState winner = GridSquareState.empty;
+
+        // Horizontal Win Checks
+        winner = _gridManager.CheckForWWin(0, 1, 2);
+        if(winner != GridSquareState.empty)
+        {
+            return winner;
+        }
+        winner = _gridManager.CheckForWWin(3, 4, 5);
+        if(winner != GridSquareState.empty)
+        {
+            return winner;
+        }
+        winner = _gridManager.CheckForWWin(6, 7, 8);
+        if(winner != GridSquareState.empty)
+        {
+            return winner;
+        }
+
+        // Vertical Win Checks
+        winner = _gridManager.CheckForWWin(0, 3, 6);
+        if(winner != GridSquareState.empty)
+        {
+            return winner;
+        }
+        winner = _gridManager.CheckForWWin(1, 4, 7);
+        if(winner != GridSquareState.empty)
+        {
+            return winner;
+        }
+        winner = _gridManager.CheckForWWin(2, 5, 8);
+        if(winner != GridSquareState.empty)
+        {
+            return winner;
+        }
+
+        // Diagonal Win Checks
+        winner = _gridManager.CheckForWWin(0, 4, 8);
+        if(winner != GridSquareState.empty)
+        {
+            return winner;
+        }
+        winner = _gridManager.CheckForWWin(2, 4, 6);
+        if(winner != GridSquareState.empty)
+        {
+            return winner;
+        }
+
+        return winner;
     }
     public void ChangeTurn()
     {
@@ -90,4 +182,12 @@ public enum Turn
 {
     playerTurn,
     enemyTurn
+}
+
+public enum GameResult
+{
+    ongoing,
+    draw,
+    PlayerWin,
+    EnemyWin
 }
