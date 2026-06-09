@@ -14,10 +14,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _enemyCharacterText;
     [SerializeField] private TextMeshProUGUI _currentPlayerNumberText;
     [SerializeField] private TextMeshProUGUI _currentPlayerCharText;
+    [SerializeField] private GameObject _gameResultUI;
+    [SerializeField] private GameObject _currentTurnUI;
+    [SerializeField] private TextMeshProUGUI _gameResultText;
 
     private void Awake()
     {
-        if(Instance == null)
+        if(Instance == null && Instance != this)
         {
             Instance = this;
         }
@@ -58,6 +61,8 @@ public class GameManager : MonoBehaviour
         _playerCharacterText.text = _playerSquareState.ToString();
         _enemyCharacterText.text = _enemySquareState.ToString();
 
+        _gameResultUI.SetActive(false);
+        _currentTurnUI.SetActive(true);
         SetCurrentTurnUI();
         _awaitingTime = true;
     }
@@ -83,6 +88,11 @@ public class GameManager : MonoBehaviour
             ChangeTurn();
             _awaitingTime = true;
         }
+        else
+        {
+            _currentTurnUI.SetActive(false);
+            _gameResultUI.SetActive(true);
+        }
     }
 
     private bool CheckIfGameEnded()
@@ -94,12 +104,16 @@ public class GameManager : MonoBehaviour
         {
             if(winner == _playerSquareState)
             {
+                //Player has won
                 _currentGameState = GameResult.PlayerWin;
+                _gameResultText.text = _playerSquareState.ToString() +" WINS";
                 return true;
             }
             else
             {
+                // Enemy has won
                 _currentGameState = GameResult.EnemyWin;
+                _gameResultText.text = _enemySquareState.ToString() +" WINS";
                 return true;
             }
         }
@@ -107,7 +121,9 @@ public class GameManager : MonoBehaviour
         {
             if(gridFull)
             {
+                // Game is a draw
                 _currentGameState = GameResult.draw;
+                _gameResultText.text = "DRAW";
                 return true;
             }
             else
