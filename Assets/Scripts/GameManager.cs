@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _gameResultUI;
     [SerializeField] private GameObject _currentTurnUI;
     [SerializeField] private TextMeshProUGUI _gameResultText;
+    [SerializeField] private Color _playerColor;
+    [SerializeField] private Color _enemyColor;
 
     private void Awake()
     {
@@ -72,15 +74,18 @@ public class GameManager : MonoBehaviour
         _awaitingTime = false;
         GridSquareState state = GridSquareState.empty;
 
+        Color turnColor = Color.white;
         if(turn == Turn.playerTurn)
         {
             state = _playerSquareState;
+            turnColor = _playerColor;
         }
         else if(turn == Turn.enemyTurn)
         {
             state = _enemySquareState;
+            turnColor = _enemyColor;
         }
-        _gridManager.SetSpecificSquare(state, selectedSquare);
+        _gridManager.SetSpecificSquare(state, selectedSquare, turnColor);
 
         bool gameEnded =CheckIfGameEnded();
         if(!gameEnded)
@@ -107,6 +112,7 @@ public class GameManager : MonoBehaviour
                 //Player has won
                 _currentGameState = GameResult.PlayerWin;
                 _gameResultText.text = _playerSquareState.ToString() +" WINS";
+                _gameResultText.color = _playerColor;
                 return true;
             }
             else
@@ -114,6 +120,7 @@ public class GameManager : MonoBehaviour
                 // Enemy has won
                 _currentGameState = GameResult.EnemyWin;
                 _gameResultText.text = _enemySquareState.ToString() +" WINS";
+                _gameResultText.color = _enemyColor;
                 return true;
             }
         }
@@ -124,6 +131,7 @@ public class GameManager : MonoBehaviour
                 // Game is a draw
                 _currentGameState = GameResult.draw;
                 _gameResultText.text = "DRAW";
+                _gameResultText.color = Color.black;
                 return true;
             }
             else
@@ -202,12 +210,16 @@ public class GameManager : MonoBehaviour
         if(_currentTurn == Turn.playerTurn)
         {
             _currentPlayerNumberText.text = "Player 1";
+            _currentPlayerNumberText.color = _playerColor;
+            _currentPlayerCharText.color = _playerColor;
             _currentPlayerCharText.text = _playerSquareState.ToString();
         }
         else
         {
             _currentPlayerNumberText.text = "Player 2";
-            _currentPlayerCharText.text = _enemySquareState.ToString();
+            _currentPlayerNumberText.color = _enemyColor;
+            _currentPlayerCharText.color = _enemyColor;
+            _currentPlayerCharText.text = _enemySquareState.ToString();   
         }
     }
     public void GridSquareClicked(int clickedSquare)

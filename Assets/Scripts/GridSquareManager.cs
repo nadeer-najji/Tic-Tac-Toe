@@ -19,8 +19,9 @@ public class GridSquareManager : MonoBehaviour, IPointerClickHandler
         return _currentState;
     }
 
-    public void SetSquare(GridSquareState newState)
+    public void SetSquare(GridSquareState newState, Color newColor)
     {
+        Debug.Log("SetSquare called with: " + newState);
         if(newState == GridSquareState.empty)
         {
             _oText.enabled = false;
@@ -37,6 +38,9 @@ public class GridSquareManager : MonoBehaviour, IPointerClickHandler
             _xText.enabled = false;
         }
         _currentState = newState;
+        _oText.color = newColor;
+        _xText.color = newColor;
+
     }
     public void SetSquareId(int id)
     {

@@ -6,21 +6,16 @@ public class GridManager : MonoBehaviour
 
     public void ResetGrid()
     {
-        foreach(GridSquareManager square in _grid)
-        {
-            square.SetSquare(GridSquareState.empty);
-        }
-
         for(int i=0;i<_grid.Length;i++)
         {
-            _grid[i].SetSquare(GridSquareState.empty);
+            _grid[i].SetSquare(GridSquareState.empty, Color.white);
             _grid[i].SetSquareId(i);
         }
     }
 
-    public void SetSpecificSquare(GridSquareState gridSquareState, int square)
+    public void SetSpecificSquare(GridSquareState gridSquareState, int square, Color color)
     {
-        _grid[square].SetSquare(gridSquareState);
+        _grid[square].SetSquare(gridSquareState, color);
     }
     public GridSquareState GetSpecificSquareState(int squareId)
     {
