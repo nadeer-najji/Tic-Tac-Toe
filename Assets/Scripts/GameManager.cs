@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gameResultText;
     [SerializeField] private Color _playerColor;
     [SerializeField] private Color _enemyColor;
+    [SerializeField] private WinLineManager _winLineManager;
 
     private void Awake()
     {
@@ -65,6 +66,9 @@ public class GameManager : MonoBehaviour
 
         _gameResultUI.SetActive(false);
         _currentTurnUI.SetActive(true);
+
+        _winLineManager.SetWinLine(WinLine.none);
+
         SetCurrentTurnUI();
         _awaitingTime = true;
     }
@@ -149,16 +153,19 @@ public class GameManager : MonoBehaviour
         winner = _gridManager.CheckForWWin(0, 1, 2);
         if(winner != GridSquareState.empty)
         {
+            _winLineManager.SetWinLine(WinLine.horizontalTop);
             return winner;
         }
         winner = _gridManager.CheckForWWin(3, 4, 5);
         if(winner != GridSquareState.empty)
         {
+            _winLineManager.SetWinLine(WinLine.horizontalMiddle);
             return winner;
         }
         winner = _gridManager.CheckForWWin(6, 7, 8);
         if(winner != GridSquareState.empty)
         {
+            _winLineManager.SetWinLine(WinLine.horizontalBottom);
             return winner;
         }
 
@@ -166,16 +173,19 @@ public class GameManager : MonoBehaviour
         winner = _gridManager.CheckForWWin(0, 3, 6);
         if(winner != GridSquareState.empty)
         {
+            _winLineManager.SetWinLine(WinLine.verticalLeft);
             return winner;
         }
         winner = _gridManager.CheckForWWin(1, 4, 7);
         if(winner != GridSquareState.empty)
         {
+            _winLineManager.SetWinLine(WinLine.verticalMiddle);
             return winner;
         }
         winner = _gridManager.CheckForWWin(2, 5, 8);
         if(winner != GridSquareState.empty)
         {
+            _winLineManager.SetWinLine(WinLine.verticalRight);
             return winner;
         }
 
@@ -183,11 +193,13 @@ public class GameManager : MonoBehaviour
         winner = _gridManager.CheckForWWin(0, 4, 8);
         if(winner != GridSquareState.empty)
         {
+            _winLineManager.SetWinLine(WinLine.diagonalDown);
             return winner;
         }
         winner = _gridManager.CheckForWWin(2, 4, 6);
         if(winner != GridSquareState.empty)
         {
+            _winLineManager.SetWinLine(WinLine.diagonalUp);
             return winner;
         }
 

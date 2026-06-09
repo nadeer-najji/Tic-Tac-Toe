@@ -21,7 +21,6 @@ public class GridSquareManager : MonoBehaviour, IPointerClickHandler
 
     public void SetSquare(GridSquareState newState, Color newColor)
     {
-        Debug.Log("SetSquare called with: " + newState);
         if(newState == GridSquareState.empty)
         {
             _oText.enabled = false;
