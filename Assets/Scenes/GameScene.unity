@@ -1422,7 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e14717eb29650401199710b4eee42df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  _gridManager: {fileID: 0}
+  _gridManager: {fileID: 224419180}
 --- !u!4 &1426670189
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class GameManager : MonoBehaviour
     private Turn _currentTurn;
     private bool _awaitingTime =false;
     private GameResult _currentGameState;
+    [SerializeField] private TextMeshProUGUI _playerCharacterText;
+    [SerializeField] private TextMeshProUGUI _enemyCharacterText;
+    [SerializeField] private TextMeshProUGUI _currentPlayerNumberText;
+    [SerializeField] private TextMeshProUGUI _currentPlayerCharText;
 
     private void Awake()
     {
@@ -23,6 +28,10 @@ public class GameManager : MonoBehaviour
         StartNewGame();
     }
 
+    public void RestartClicked()
+    {
+        StartNewGame();
+    }
     private void StartNewGame()
     {
         _currentGameState = GameResult.ongoing;
@@ -44,6 +53,12 @@ public class GameManager : MonoBehaviour
             _playerSquareState = GridSquareState.o;
             _enemySquareState = GridSquareState.x;
         }
+
+        //Set Player and Enemy Character UI
+        _playerCharacterText.text = _playerSquareState.ToString();
+        _enemyCharacterText.text = _enemySquareState.ToString();
+
+        SetCurrentTurnUI();
         _awaitingTime = true;
     }
 
@@ -163,6 +178,20 @@ public class GameManager : MonoBehaviour
         else
         {
             _currentTurn = Turn.playerTurn;
+        }
+        SetCurrentTurnUI();
+    }
+    private void SetCurrentTurnUI()
+    {
+        if(_currentTurn == Turn.playerTurn)
+        {
+            _currentPlayerNumberText.text = "Player 1";
+            _currentPlayerCharText.text = _playerSquareState.ToString();
+        }
+        else
+        {
+            _currentPlayerNumberText.text = "Player 2";
+            _currentPlayerCharText.text = _enemySquareState.ToString();
         }
     }
     public void GridSquareClicked(int clickedSquare)
