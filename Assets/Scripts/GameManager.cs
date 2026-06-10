@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Color _playerColor;
     [SerializeField] private Color _enemyColor;
     [SerializeField] private WinLineManager _winLineManager;
+    [SerializeField] private Button _restartButton;
 
     private void Awake()
     {
@@ -37,14 +39,16 @@ public class GameManager : MonoBehaviour
     public void RestartClicked()
     {
         AudioManager.Instance.PlayButtonClick();
-        
+
         StartNewGame();
     }
     private void StartNewGame()
     {
         _currentGameState = GameResult.ongoing;
+        
         // Reset the grid
         _gridManager.ResetGrid();
+        _restartButton.interactable = _gridManager.HasAnyMove();
 
         // Randomly decide who goes first
         int firstTurn = Random.Range(0, 2);
@@ -93,6 +97,7 @@ public class GameManager : MonoBehaviour
         }
         _gridManager.SetSpecificSquare(state, selectedSquare, turnColor);
         AudioManager.Instance.PlayPlaceXO();
+        _restartButton.interactable = _gridManager.HasAnyMove();
 
         bool gameEnded =CheckIfGameEnded();
         if(!gameEnded)

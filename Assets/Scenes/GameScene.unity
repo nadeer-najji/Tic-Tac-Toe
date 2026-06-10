@@ -350,7 +350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &72939891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1983,7 +1983,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6034,6 +6034,7 @@ MonoBehaviour:
   _playerColor: {r: 0.6901961, g: 0.1882353, b: 0.3764706, a: 1}
   _enemyColor: {r: 0.5568628, g: 0.3647059, b: 0.3529412, a: 1}
   _winLineManager: {fileID: 1071260162}
+  _restartButton: {fileID: 1311832707}
 --- !u!4 &1426670189
 Transform:
   m_ObjectHideFlags: 0

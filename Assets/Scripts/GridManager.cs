@@ -32,6 +32,18 @@ public class GridManager : MonoBehaviour
         }
         return true;
     }
+    public bool HasAnyMove()
+    {
+        foreach (GridSquareManager square in _grid)
+        {
+            if(square.GetSquareState() != GridSquareState.empty)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     public GridSquareState CheckForWWin(int gridSquare1, int gridSquare2, int gridSquare3)
     {
         GridSquareState state1 = _grid[gridSquare1].GetSquareState();
