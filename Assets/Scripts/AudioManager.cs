@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _bgMusicClip;
     [SerializeField] private AudioClip _buttonClickClip;
     [SerializeField] private AudioClip _placeXOClip;
+    [SerializeField] private AudioClip _matchEndClip;
 
     [Header("Settings UI")]
     [SerializeField] private Image _musicButtonImage;
@@ -30,7 +31,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance == null && Instance != this)
         {
             Instance = this;
         }
@@ -72,7 +73,7 @@ public class AudioManager : MonoBehaviour
     public void ToggleSFX()
     {
         PlayButtonClick();
-        
+
         _sfxEnabled = !_sfxEnabled;
 
         SaveSettings();
@@ -97,6 +98,14 @@ public class AudioManager : MonoBehaviour
             return;
 
         _sfxSource.PlayOneShot(_placeXOClip);
+    }
+
+    public void PlayMatchEnd()
+    {
+        if (!_sfxEnabled)
+            return;
+
+        _sfxSource.PlayOneShot(_matchEndClip);
     }
 
     //=========================================

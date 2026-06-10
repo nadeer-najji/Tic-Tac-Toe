@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     private void StartNewGame()
     {
         _currentGameState = GameResult.ongoing;
-        
+
         // Reset the grid
         _gridManager.ResetGrid();
         _restartButton.interactable = _gridManager.HasAnyMove();
@@ -107,6 +107,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.PlayMatchEnd();
+            
             _currentTurnUI.SetActive(false);
             _gameResultUI.SetActive(true);
         }

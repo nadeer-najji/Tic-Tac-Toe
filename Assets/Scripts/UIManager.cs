@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance == null && Instance != this)
         {
             Instance = this;
         }
@@ -145,7 +145,7 @@ public class UIManager : MonoBehaviour
     public void NoButtonClicked()
     {
         AudioManager.Instance.PlayButtonClick();
-        
+
         _backPanel.SetActive(false);
     }
 }
