@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartClicked()
     {
+        AudioManager.Instance.PlayButtonClick();
+        
         StartNewGame();
     }
     private void StartNewGame()
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
             turnColor = _enemyColor;
         }
         _gridManager.SetSpecificSquare(state, selectedSquare, turnColor);
+        AudioManager.Instance.PlayPlaceXO();
 
         bool gameEnded =CheckIfGameEnded();
         if(!gameEnded)
