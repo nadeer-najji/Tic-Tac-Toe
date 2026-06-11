@@ -29,6 +29,8 @@ public class AudioManager : MonoBehaviour
     private const string MUSIC_KEY = "MusicEnabled";
     private const string SFX_KEY = "SFXEnabled";
 
+    #region Unity Methods
+
     private void Awake()
     {
         if (Instance == null && Instance != this)
@@ -52,9 +54,9 @@ public class AudioManager : MonoBehaviour
         ApplySettings();
     }
 
-    //=========================================
-    // MUSIC
-    //=========================================
+    #endregion
+
+    #region Music
 
     public void ToggleMusic()
     {
@@ -66,9 +68,9 @@ public class AudioManager : MonoBehaviour
         ApplySettings();
     }
 
-    //=========================================
-    // SFX
-    //=========================================
+    #endregion
+
+    #region SFX
 
     public void ToggleSFX()
     {
@@ -79,10 +81,9 @@ public class AudioManager : MonoBehaviour
         SaveSettings();
         ApplySettings();
     }
+    #endregion
 
-    //=========================================
-    // PLAY SOUNDS
-    //=========================================
+    #region Play Sounds
 
     public void PlayButtonClick()
     {
@@ -108,9 +109,9 @@ public class AudioManager : MonoBehaviour
         _sfxSource.PlayOneShot(_matchEndClip);
     }
 
-    //=========================================
-    // SETTINGS
-    //=========================================
+    #endregion
+
+    #region Settings
 
     private void ApplySettings()
     {
@@ -140,9 +141,9 @@ public class AudioManager : MonoBehaviour
             PlayerPrefs.GetInt(SFX_KEY, 1) == 1;
     }
 
-    //=========================================
-    // GETTERS
-    //=========================================
+    #endregion
+
+    #region Getters
 
     public bool IsMusicEnabled()
     {
@@ -153,4 +154,6 @@ public class AudioManager : MonoBehaviour
     {
         return _sfxEnabled;
     }
+
+    #endregion
 }

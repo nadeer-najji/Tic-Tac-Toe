@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private GridSquareState _enemySquareState;
     private Turn _currentTurn;
     private bool _awaitingTime =false;
-    private GameResult _currentGameState;
+    //private GameResult _currentGameState;
     [SerializeField] private TextMeshProUGUI _playerCharacterText;
     [SerializeField] private TextMeshProUGUI _enemyCharacterText;
     [SerializeField] private TextMeshProUGUI _currentPlayerNumberText;
@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Color _enemyColor;
     [SerializeField] private WinLineManager _winLineManager;
     [SerializeField] private Button _restartButton;
+
+    #region Unity Methods
 
     private void Awake()
     {
@@ -36,6 +38,10 @@ public class GameManager : MonoBehaviour
         StartNewGame();
     }
 
+    #endregion
+
+    #region Game Flow
+
     public void RestartClicked()
     {
         AudioManager.Instance.PlayButtonClick();
@@ -44,11 +50,11 @@ public class GameManager : MonoBehaviour
     }
     private void StartNewGame()
     {
-        _currentGameState = GameResult.ongoing;
+        //_currentGameState = GameResult.ongoing;
 
         // Reset the grid
         _gridManager.ResetGrid();
-        _restartButton.interactable = _gridManager.HasAnyMove();
+        UpdateRestartButton();
 
         // Randomly decide who goes first
         int firstTurn = Random.Range(0, 2);
@@ -79,6 +85,10 @@ public class GameManager : MonoBehaviour
         _awaitingTime = true;
     }
 
+    #endregion
+
+    #region Turn Logic
+
     private void ProcessTurn(Turn turn, int selectedSquare)
     {
         _awaitingTime = false;
@@ -97,7 +107,7 @@ public class GameManager : MonoBehaviour
         }
         _gridManager.SetSpecificSquare(state, selectedSquare, turnColor);
         AudioManager.Instance.PlayPlaceXO();
-        _restartButton.interactable = _gridManager.HasAnyMove();
+        UpdateRestartButton();
 
         bool gameEnded =CheckIfGameEnded();
         if(!gameEnded)
@@ -114,6 +124,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeTurn()
+    {
+        if(_currentTurn == Turn.playerTurn)
+        {
+            _currentTurn = Turn.enemyTurn;
+        }
+        else
+        {
+            _currentTurn = Turn.playerTurn;
+        }
+        SetCurrentTurnUI();
+    }
+
+    #endregion
+
+    #region Win Checks
+
     private bool CheckIfGameEnded()
     {
         bool gridFull = _gridManager.CheckIfGridFull();
@@ -124,7 +151,7 @@ public class GameManager : MonoBehaviour
             if(winner == _playerSquareState)
             {
                 //Player has won
-                _currentGameState = GameResult.PlayerWin;
+                //_currentGameState = GameResult.PlayerWin;
                 _gameResultText.text = _playerSquareState.ToString() +" WINS";
                 _gameResultText.color = _playerColor;
                 return true;
@@ -132,7 +159,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 // Enemy has won
-                _currentGameState = GameResult.EnemyWin;
+                //_currentGameState = GameResult.EnemyWin;
                 _gameResultText.text = _enemySquareState.ToString() +" WINS";
                 _gameResultText.color = _enemyColor;
                 return true;
@@ -143,7 +170,7 @@ public class GameManager : MonoBehaviour
             if(gridFull)
             {
                 // Game is a draw
-                _currentGameState = GameResult.draw;
+                //_currentGameState = GameResult.draw;
                 _gameResultText.text = "DRAW";
                 _gameResultText.color = Color.black;
                 return true;
@@ -160,19 +187,19 @@ public class GameManager : MonoBehaviour
         GridSquareState winner = GridSquareState.empty;
 
         // Horizontal Win Checks
-        winner = _gridManager.CheckForWWin(0, 1, 2);
+        winner = _gridManager.CheckForWin(0, 1, 2);
         if(winner != GridSquareState.empty)
         {
             _winLineManager.SetWinLine(WinLine.horizontalTop);
             return winner;
         }
-        winner = _gridManager.CheckForWWin(3, 4, 5);
+        winner = _gridManager.CheckForWin(3, 4, 5);
         if(winner != GridSquareState.empty)
         {
             _winLineManager.SetWinLine(WinLine.horizontalMiddle);
             return winner;
         }
-        winner = _gridManager.CheckForWWin(6, 7, 8);
+        winner = _gridManager.CheckForWin(6, 7, 8);
         if(winner != GridSquareState.empty)
         {
             _winLineManager.SetWinLine(WinLine.horizontalBottom);
@@ -180,19 +207,19 @@ public class GameManager : MonoBehaviour
         }
 
         // Vertical Win Checks
-        winner = _gridManager.CheckForWWin(0, 3, 6);
+        winner = _gridManager.CheckForWin(0, 3, 6);
         if(winner != GridSquareState.empty)
         {
             _winLineManager.SetWinLine(WinLine.verticalLeft);
             return winner;
         }
-        winner = _gridManager.CheckForWWin(1, 4, 7);
+        winner = _gridManager.CheckForWin(1, 4, 7);
         if(winner != GridSquareState.empty)
         {
             _winLineManager.SetWinLine(WinLine.verticalMiddle);
             return winner;
         }
-        winner = _gridManager.CheckForWWin(2, 5, 8);
+        winner = _gridManager.CheckForWin(2, 5, 8);
         if(winner != GridSquareState.empty)
         {
             _winLineManager.SetWinLine(WinLine.verticalRight);
@@ -200,13 +227,13 @@ public class GameManager : MonoBehaviour
         }
 
         // Diagonal Win Checks
-        winner = _gridManager.CheckForWWin(0, 4, 8);
+        winner = _gridManager.CheckForWin(0, 4, 8);
         if(winner != GridSquareState.empty)
         {
             _winLineManager.SetWinLine(WinLine.diagonalDown);
             return winner;
         }
-        winner = _gridManager.CheckForWWin(2, 4, 6);
+        winner = _gridManager.CheckForWin(2, 4, 6);
         if(winner != GridSquareState.empty)
         {
             _winLineManager.SetWinLine(WinLine.diagonalUp);
@@ -215,18 +242,11 @@ public class GameManager : MonoBehaviour
 
         return winner;
     }
-    public void ChangeTurn()
-    {
-        if(_currentTurn == Turn.playerTurn)
-        {
-            _currentTurn = Turn.enemyTurn;
-        }
-        else
-        {
-            _currentTurn = Turn.playerTurn;
-        }
-        SetCurrentTurnUI();
-    }
+
+    #endregion
+
+    #region UI
+    
     private void SetCurrentTurnUI()
     {
         if(_currentTurn == Turn.playerTurn)
@@ -244,6 +264,17 @@ public class GameManager : MonoBehaviour
             _currentPlayerCharText.text = _enemySquareState.ToString();   
         }
     }
+
+    private void UpdateRestartButton()
+    {
+        _restartButton.interactable =
+            _gridManager.HasAnyMove();
+    }
+
+    #endregion
+
+    #region Input
+    
     public void GridSquareClicked(int clickedSquare)
     {
         if(_awaitingTime == false)
@@ -257,12 +288,15 @@ public class GameManager : MonoBehaviour
         ProcessTurn(_currentTurn, clickedSquare);
     }
 }
+
+#endregion
 public enum Turn
 {
     playerTurn,
     enemyTurn
 }
 
+/*
 public enum GameResult
 {
     ongoing,
@@ -270,3 +304,4 @@ public enum GameResult
     PlayerWin,
     EnemyWin
 }
+*/

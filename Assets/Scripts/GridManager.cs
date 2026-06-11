@@ -44,7 +44,7 @@ public class GridManager : MonoBehaviour
 
         return false;
     }
-    public GridSquareState CheckForWWin(int gridSquare1, int gridSquare2, int gridSquare3)
+    public GridSquareState CheckForWin(int gridSquare1, int gridSquare2, int gridSquare3)
     {
         GridSquareState state1 = _grid[gridSquare1].GetSquareState();
         GridSquareState state2 = _grid[gridSquare2].GetSquareState();

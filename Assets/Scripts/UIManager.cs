@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEditor.ProjectWindowCallback;
 
 public class UIManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class UIManager : MonoBehaviour
     private GameObject _targetPanel;
     private bool _quitRequested;
 
+    #region Unity Methods
+
     private void Awake()
     {
         if (Instance == null && Instance != this)
@@ -35,9 +38,9 @@ public class UIManager : MonoBehaviour
         ShowHomePanel();
     }
 
-    //==================================================
-    // HOME PANEL
-    //==================================================
+    #endregion
+
+    #region Home Panel
 
     private void ShowHomePanel()
     {
@@ -72,9 +75,9 @@ public class UIManager : MonoBehaviour
         _backPanel.SetActive(true);
     }
 
-    //==================================================
-    // SETTINGS
-    //==================================================
+    #endregion
+
+    #region Settings
 
     public void OpenSettingsFromHome()
     {
@@ -102,9 +105,20 @@ public class UIManager : MonoBehaviour
         _targetPanel = _gamePanel;
     }
 
-    //==================================================
-    // BACK PANEL OPENING
-    //==================================================
+    public void SettingsBackClicked()
+    {
+        AudioManager.Instance.PlayButtonClick();
+
+        _settingsPanel.SetActive(false);
+
+        _targetPanel.SetActive(true);
+
+        _currentPanel = _targetPanel;
+    }
+
+    #endregion
+
+    #region Back Panel
 
     public void OpenBackPanelFromGame()
     {
@@ -118,21 +132,6 @@ public class UIManager : MonoBehaviour
 
         _backPanel.SetActive(true);
     }
-
-    public void SettingsBackClicked()
-    {
-        AudioManager.Instance.PlayButtonClick();
-
-        _settingsPanel.SetActive(false);
-
-        _targetPanel.SetActive(true);
-
-        _currentPanel = _targetPanel;
-    }
-
-    //==================================================
-    // BACK PANEL BUTTONS
-    //==================================================
 
     public void YesButtonClicked()
     {
@@ -163,4 +162,7 @@ public class UIManager : MonoBehaviour
 
         _backPanel.SetActive(false);
     }
+
+    #endregion
+
 }
