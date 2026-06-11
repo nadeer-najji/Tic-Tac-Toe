@@ -34,7 +34,12 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+    }
+
+    private void Start()
+    {
         StartNewGame();
     }
 
@@ -295,13 +300,3 @@ public enum Turn
     playerTurn,
     enemyTurn
 }
-
-/*
-public enum GameResult
-{
-    ongoing,
-    draw,
-    PlayerWin,
-    EnemyWin
-}
-*/
