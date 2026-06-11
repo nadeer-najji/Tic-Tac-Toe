@@ -1983,7 +1983,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4471,6 +4471,7 @@ MonoBehaviour:
   _bgMusicClip: {fileID: 8300000, guid: 475b8375b84c24e9d8a722fec18c1bc1, type: 3}
   _buttonClickClip: {fileID: 8300000, guid: ba0b3ac1321be4ee491a92eb5dc89c8c, type: 3}
   _placeXOClip: {fileID: 8300000, guid: 1028b7dc8b442411392182e2bae7543f, type: 3}
+  _matchEndClip: {fileID: 8300000, guid: 37dd05adcc7da4e07be059c45fee5f2c, type: 3}
   _musicButtonImage: {fileID: 1585571924}
   _sfxButtonImage: {fileID: 1569202480}
   _onSprite: {fileID: -3339390509798782359, guid: d8a04c7d58a5d40ad988a8d34d2e7587, type: 3}
@@ -7979,7 +7980,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1426670190}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenSettingsFromGame
+        m_MethodName: SettingsBackClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8324,7 +8325,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1426670190}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenSettingsFromHome
+        m_MethodName: SettingsBackClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

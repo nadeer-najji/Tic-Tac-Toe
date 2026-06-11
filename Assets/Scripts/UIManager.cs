@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
 
     private GameObject _currentPanel;
     private GameObject _targetPanel;
+    private bool _quitRequested;
 
     private void Awake()
     {
@@ -64,11 +65,11 @@ public class UIManager : MonoBehaviour
     {
         AudioManager.Instance.PlayButtonClick();
 
-        Application.Quit();
+        _quitRequested = true;
 
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        _backPanelMessageText.text = "DO YOU WANT TO QUIT?";
+
+        _backPanel.SetActive(true);
     }
 
     //==================================================
@@ -109,6 +110,8 @@ public class UIManager : MonoBehaviour
     {
         AudioManager.Instance.PlayButtonClick();
 
+        _quitRequested = false;
+
         _backPanelMessageText.text = "DO YOU WANT TO GO BACK?";
 
         _targetPanel = _homePanel;
@@ -116,13 +119,15 @@ public class UIManager : MonoBehaviour
         _backPanel.SetActive(true);
     }
 
-    public void OpenBackPanelFromSettings()
+    public void SettingsBackClicked()
     {
         AudioManager.Instance.PlayButtonClick();
 
-        _backPanelMessageText.text = "DO YOU WANT TO GO BACK?";
+        _settingsPanel.SetActive(false);
 
-        _backPanel.SetActive(true);
+        _targetPanel.SetActive(true);
+
+        _currentPanel = _targetPanel;
     }
 
     //==================================================
@@ -134,6 +139,16 @@ public class UIManager : MonoBehaviour
         AudioManager.Instance.PlayButtonClick();
 
         _backPanel.SetActive(false);
+
+        if (_quitRequested)
+        {
+            Application.Quit();
+
+    #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+    #endif
+            return;
+        }
 
         _currentPanel.SetActive(false);
 
